@@ -47,8 +47,8 @@ export const normalizeResponse = (data) => {
  * Estados y enums para el nuevo sistema
  */
 export const PROJECT_STATUS = {
-  PLANNING: 'planificacion',
-  IN_PROGRESS: 'en_progreso',
+  PLANNING: 'planificado',
+  IN_PROGRESS: 'en-desarrollo', // CORREGIDO: backend usa 'en-desarrollo'
   COMPLETED: 'completado',
   PAUSED: 'pausado'
 };

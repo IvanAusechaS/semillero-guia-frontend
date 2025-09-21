@@ -110,7 +110,14 @@ const ProjectForm = () => {
         toast.success('Proyecto creado exitosamente')
       }
 
-      navigate(`/projects/${response.project._id}`)
+      // Verificar que la respuesta sea exitosa y tenga datos
+      if (response.success && response.project) {
+        // Backend de proyectos usa 'id' en lugar de '_id' (temporalmente)
+        const projectId = response.project.id || response.project._id
+        navigate(`/projects/${projectId}`)
+      } else {
+        throw new Error(response.message || 'Error en la respuesta del servidor')
+      }
     } catch (error) {
       console.error('Error saving project:', error)
       toast.error(error.response?.data?.message || `Error al ${isEditing ? 'actualizar' : 'crear'} el proyecto`)

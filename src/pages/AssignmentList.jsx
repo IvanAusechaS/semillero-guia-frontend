@@ -8,7 +8,9 @@ import {
   Filter,
   Eye,
   RefreshCw,
-  AlertTriangle
+  AlertTriangle,
+  Plus,
+  Edit
 } from 'lucide-react'
 import { assignmentService } from '../services/api'
 import { AuthContext } from '../context/AuthContext'
@@ -20,7 +22,7 @@ import {
   ASSIGNMENT_PRIORITY,
   ASSIGNMENT_STATUS 
 } from '../utils/mongodb'
-import toast from 'react-hot-toast'
+import { toast } from 'react-hot-toast'
 
 const AssignmentList = () => {
   const { user } = useContext(AuthContext)
@@ -53,29 +55,53 @@ const AssignmentList = () => {
         ...(filters.priority && { priority: filters.priority })
       }
 
-      const response = await assignmentService.getMyAssignments(params)
-      setAssignments(response.assignments || [])
-      setPagination(prev => ({
-        ...prev,
-        total: response.pagination?.total || 0,
-        totalPages: response.pagination?.totalPages || 0
-      }))
-    } catch (error) {
-      console.error('Error fetching assignments:', error)
+      // Los docentes ven todas las asignaciones, los estudiantes solo las suyas
+      const response = user.role === 'docente' 
+        ? await assignmentService.getAllAssignments(params)
+        : await assignmentService.getMyAssignments(params)
       
-      // Check if it's a 404 error (endpoint not implemented)
-      if (error.response?.status === 404) {
-        toast.error('Sistema de asignaciones en desarrollo. Próximamente disponible.')
-        // Set empty data to show proper UI message
+      if (response.success) {
+        setAssignments(response.assignments || [])
+        setPagination(prev => ({
+          ...prev,
+          total: response.pagination?.total || 0,
+          totalPages: response.pagination?.totalPages || 0
+        }))
+        
+        console.log('Assignments loaded:', response.assignments?.length || 0)
+      } else {
+        console.warn('Assignment service returned error:', response.message)
+        toast.error(response.message || 'Error al cargar asignaciones')
+        
+        // Set empty data pero mantenemos la UI funcional
         setAssignments([])
         setPagination(prev => ({
           ...prev,
           total: 0,
           totalPages: 0
         }))
+      }
+    } catch (error) {
+      console.error('Error fetching assignments:', error)
+      
+      // Manejar errores específicos del backend
+      if (error.response?.status === 404) {
+        toast.error('Sistema de asignaciones en desarrollo. Próximamente disponible.')
+      } else if (error.response?.status === 401) {
+        toast.error('Sesión expirada. Por favor inicia sesión nuevamente.')
+      } else if (error.response?.status >= 500) {
+        toast.error('Error del servidor. Inténtalo más tarde.')
       } else {
         toast.error('Error al cargar las asignaciones')
       }
+      
+      // Set empty data para mostrar mensaje apropiado en UI
+      setAssignments([])
+      setPagination(prev => ({
+        ...prev,
+        total: 0,
+        totalPages: 0
+      }))
     } finally {
       setLoading(false)
     }
@@ -160,20 +186,34 @@ const AssignmentList = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div>
               <h1 className="text-3xl md:text-4xl font-heading font-bold text-gradient mb-2">
-                Mis Asignaciones
+                {user.role === 'docente' ? 'Gestión de Asignaciones' : 'Mis Asignaciones'}
               </h1>
               <p className="text-gray-600">
-                Gestiona y realiza seguimiento a tus tareas asignadas
+                {user.role === 'docente' 
+                  ? 'Crea y gestiona asignaciones para tus estudiantes'
+                  : 'Gestiona y realiza seguimiento a tus tareas asignadas'
+                }
               </p>
             </div>
             
-            <button
-              onClick={fetchAssignments}
-              className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-200"
-            >
-              <RefreshCw className="w-4 h-4 mr-2" />
-              Actualizar
-            </button>
+            <div className="flex gap-2">
+              {user.role === 'docente' && (
+                <Link
+                  to="/assignments/create"
+                  className="flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors duration-200"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Nueva Asignación
+                </Link>
+              )}
+              <button
+                onClick={fetchAssignments}
+                className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-200"
+              >
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Actualizar
+              </button>
+            </div>
           </div>
 
           {/* Filters */}
@@ -349,6 +389,17 @@ const AssignmentList = () => {
                                 </span>
                               </div>
                             )}
+                            
+                            {user.role === 'docente' && assignment.assignedTo && (
+                              <div className="flex items-center">
+                                <span className="w-4 h-4 mr-1">👥</span>
+                                <span>
+                                  Asignado a: {Array.isArray(assignment.assignedTo) 
+                                    ? `${assignment.assignedTo.length} estudiante${assignment.assignedTo.length > 1 ? 's' : ''}`
+                                    : '1 estudiante'}
+                                </span>
+                              </div>
+                            )}
                           </div>
                         </div>
 
@@ -360,6 +411,16 @@ const AssignmentList = () => {
                             <Eye className="w-4 h-4 mr-2" />
                             Ver Detalles
                           </Link>
+                          
+                          {user.role === 'docente' && (
+                            <Link
+                              to={`/assignments/${assignment._id}/edit`}
+                              className="flex items-center px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors duration-200"
+                            >
+                              <Edit className="w-4 h-4 mr-2" />
+                              Editar
+                            </Link>
+                          )}
                         </div>
                       </div>
                     </motion.div>

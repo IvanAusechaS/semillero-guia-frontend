@@ -17,6 +17,7 @@ import Forum from './pages/Forum'
 import Dashboard from './pages/Dashboard'
 import AssignmentList from './pages/AssignmentList'
 import AssignmentDetail from './pages/AssignmentDetail'
+import AssignmentForm from './pages/AssignmentForm'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
@@ -40,7 +41,9 @@ function App() {
               
               {/* Assignment routes */}
               <Route path="/assignments" element={<AssignmentList />} />
+              <Route path="/assignments/create" element={<AssignmentForm />} />
               <Route path="/assignments/:id" element={<AssignmentDetail />} />
+              <Route path="/assignments/:id/edit" element={<AssignmentForm />} />
               
               {/* Other routes */}
               <Route path="/recursos" element={<Resources />} />
