@@ -44,10 +44,10 @@ const Home = () => {
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Background Animation */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-20 h-20 bg-primary-blue rounded-full animate-float"></div>
-          <div className="absolute top-32 right-20 w-16 h-16 bg-secondary-red rounded-full animate-float" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-secondary-purple rounded-full animate-float" style={{animationDelay: '4s'}}></div>
-          <div className="absolute bottom-32 right-1/4 w-24 h-24 bg-primary-blue rounded-full animate-float" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-10 left-10 w-20 h-20 bg-institutional-red rounded-full animate-float"></div>
+          <div className="absolute top-32 right-20 w-16 h-16 bg-secondary-500 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-institutional-red rounded-full animate-float" style={{animationDelay: '4s'}}></div>
+          <div className="absolute bottom-32 right-1/4 w-24 h-24 bg-secondary-500 rounded-full animate-float" style={{animationDelay: '1s'}}></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -182,8 +182,8 @@ const Home = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h2 className="section-title">Nuestros Proyectos</h2>
-              <p className="section-subtitle mx-auto">
+              <h2 className="section-title text-institutional-black">Nuestros Proyectos</h2>
+              <p className="section-subtitle mx-auto text-accent-medium">
                 Explora algunos de los proyectos en los que estamos trabajando
               </p>
             </motion.div>
@@ -195,27 +195,27 @@ const Home = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -300 }}
                 transition={{ duration: 0.5 }}
-                className="card-gradient text-center"
+                className="card-gradient text-center text-institutional-white"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                   <div>
-                    <h3 className="text-3xl font-heading font-bold mb-4">
+                    <h3 className="text-3xl font-heading font-bold mb-4 text-institutional-white">
                       {projects[currentProject].title}
                     </h3>
-                    <p className="text-lg mb-6 opacity-90">
+                    <p className="text-lg mb-6 opacity-90 text-institutional-white">
                       {projects[currentProject].description}
                     </p>
                     <div className="flex flex-wrap gap-2 justify-center mb-6">
                       {projects[currentProject].tech.map((tech) => (
                         <span
                           key={tech}
-                          className="bg-white/20 px-3 py-1 rounded-full text-sm font-medium"
+                          className="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-institutional-white"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                    <Link to="/nuestro-trabajo" className="btn-secondary bg-white text-primary-600 hover:bg-gray-100">
+                    <Link to="/nuestro-trabajo" className="btn-secondary bg-institutional-white text-institutional-red hover:bg-gray-100 border-institutional-white">
                       Ver Todos los Proyectos
                     </Link>
                   </div>
@@ -253,18 +253,18 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-institutional-white">
                 ¿Listo para ser parte del futuro?
               </h2>
-              <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+              <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto text-institutional-white">
                 Únete a nuestro semillero y forma parte de una comunidad apasionada 
                 por la inteligencia artificial y la innovación tecnológica.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/register" className="btn-primary bg-white text-primary-600 hover:bg-gray-100">
+                <Link to="/register" className="btn-primary bg-institutional-white text-institutional-red hover:bg-gray-100">
                   Únete Ahora
                 </Link>
-                <Link to="/contacto" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600">
+                <Link to="/contacto" className="btn-secondary border-institutional-white text-institutional-white hover:bg-institutional-white hover:text-institutional-red">
                   Contáctanos
                 </Link>
               </div>

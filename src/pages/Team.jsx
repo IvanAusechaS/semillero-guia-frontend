@@ -292,17 +292,17 @@ const Team = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-institutional-white">
               ¿Quieres ser parte del equipo?
             </h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto text-institutional-white">
               Siempre estamos buscando nuevos talentos apasionados por la inteligencia artificial. 
               ¡Únete a nosotros y contribuye al futuro de la tecnología!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
                 href="/register"
-                className="btn-primary bg-white text-primary-600 hover:bg-gray-100"
+                className="btn-primary bg-institutional-white text-institutional-red hover:bg-gray-100"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -310,7 +310,7 @@ const Team = () => {
               </motion.a>
               <motion.a
                 href="/contacto"
-                className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600"
+                className="btn-secondary border-institutional-white text-institutional-white hover:bg-institutional-white hover:text-institutional-red"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

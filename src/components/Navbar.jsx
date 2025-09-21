@@ -37,7 +37,7 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white/95 backdrop-blur-sm shadow-lg fixed w-full top-0 z-50"
+      className="bg-institutional-white/95 backdrop-blur-sm shadow-md fixed w-full top-0 z-50 border-b-2 border-institutional-red"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -46,11 +46,11 @@ const Navbar = () => {
             <motion.div
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-primary p-2 rounded-lg"
+              className="bg-institutional-red p-2 rounded-lg"
             >
-              <Brain className="w-8 h-8 text-white" />
+              <Brain className="w-8 h-8 text-institutional-white" />
             </motion.div>
-            <span className="font-tech text-xl font-bold text-gradient">
+            <span className="font-institutional text-xl font-bold text-institutional-red">
               Semillero GUIA
             </span>
           </Link>
@@ -62,7 +62,7 @@ const Navbar = () => {
                 key={item.name}
                 to={item.path}
                 className={`navbar-item ${
-                  location.pathname === item.path ? 'text-primary-600' : ''
+                  location.pathname === item.path ? 'navbar-item-active' : ''
                 }`}
               >
                 {item.name}

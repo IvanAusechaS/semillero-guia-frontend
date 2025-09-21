@@ -43,12 +43,24 @@ const Dashboard = () => {
     try {
       setLoading(true)
       
-      // Fetch data in parallel
-      const [projectsRes, assignmentsRes, eventsRes] = await Promise.all([
-        projectService.getProjects({ limit: 6 }),
-        assignmentService.getMyAssignments({ status: 'pendiente', limit: 5 }),
-        eventService.getEvents({ upcoming: true, limit: 5 })
-      ])
+      // Fetch data with fallbacks for missing endpoints
+      const promises = [
+        projectService.getProjects({ limit: 6 }).catch(err => {
+          console.warn('Projects endpoint error:', err.message)
+          return { projects: [], pagination: { total: 0 } }
+        }),
+        assignmentService.getMyAssignments({ status: 'pendiente', limit: 5 }).catch(err => {
+          console.warn('Assignments endpoint not available:', err.message)
+          toast.error('Sistema de asignaciones temporalmente no disponible')
+          return { assignments: [] }
+        }),
+        eventService.getEvents({ upcoming: true, limit: 5 }).catch(err => {
+          console.warn('Events endpoint error:', err.message)
+          return { events: [] }
+        })
+      ]
+
+      const [projectsRes, assignmentsRes, eventsRes] = await Promise.all(promises)
 
       // Calculate stats
       const myProjectsCount = projectsRes.projects?.filter(project => 
@@ -253,7 +265,12 @@ const Dashboard = () => {
               {dashboardData.assignments.length === 0 ? (
                 <div className="text-center py-8">
                   <CheckSquare className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-600">¡Todas las tareas completadas!</p>
+                  <p className="text-gray-600 mb-4">Sistema de asignaciones en desarrollo</p>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p className="text-sm text-blue-700">
+                      <strong>Próximamente:</strong> Gestión completa de tareas y asignaciones académicas
+                    </p>
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-3">

@@ -7,36 +7,67 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'heading': ['Poppins', 'Montserrat', 'sans-serif'],
-        'body': ['Roboto', 'Open Sans', 'sans-serif'],
-        'tech': ['Orbitron', 'monospace'],
+        // Tipografía institucional según especificaciones
+        'heading': ['Open Sans', 'Roboto', 'Lato', 'sans-serif'], // Sans-serif moderna para encabezados
+        'body': ['Open Sans', 'Roboto', 'Lato', 'sans-serif'],    // Misma fuente para consistencia
+        'institutional': ['Open Sans', 'sans-serif'],              // Fuente institucional principal
       },
       colors: {
+        // Colores institucionales de la universidad
+        institutional: {
+          red: '#B40000',      // Rojo institucional principal
+          white: '#FFFFFF',    // Blanco puro
+          lightGray: '#F5F5F5', // Gris claro para fondos
+          mediumGray: '#666666', // Gris medio para texto secundario
+          black: '#000000',    // Negro para encabezados
+          blue: '#003366',     // Azul oscuro para enlaces
+        },
         primary: {
-          blue: '#3B82F6',
-          red: '#EF4444',
-          purple: '#8B5CF6',
-          50: '#EBF8FF',
-          100: '#BEE3F8',
-          500: '#3B82F6',
-          600: '#2563EB',
-          700: '#1D4ED8',
-          900: '#1E3A8A',
+          // Mantener estructura de primary pero con colores institucionales
+          50: '#FEF2F2',       // Muy claro del rojo institucional
+          100: '#FEE2E2',      // Claro del rojo institucional
+          200: '#FECACA',      // Medio claro
+          300: '#FCA5A5',      // Medio
+          400: '#F87171',      // Medio oscuro
+          500: '#B40000',      // Rojo institucional (color principal)
+          600: '#A30000',      // Más oscuro
+          700: '#920000',      // Oscuro
+          800: '#7F0000',      // Muy oscuro
+          900: '#6B0000',      // Muy muy oscuro
         },
         secondary: {
-          red: '#EF4444',
-          purple: '#8B5CF6',
+          // Azul institucional para enlaces y elementos secundarios
+          50: '#F0F8FF',       // Muy claro del azul
+          100: '#E0F2FE',      // Claro del azul
+          200: '#BAE6FD',      // Medio claro
+          300: '#7DD3FC',      // Medio
+          400: '#38BDF8',      // Medio oscuro
+          500: '#003366',      // Azul institucional (color principal)
+          600: '#002A55',      // Más oscuro
+          700: '#002244',      // Oscuro
+          800: '#001A33',      // Muy oscuro
+          900: '#001122',      // Muy muy oscuro
         },
+        accent: {
+          // Grises institucionales
+          light: '#F5F5F5',    // Gris claro para fondos
+          medium: '#666666',   // Gris medio para texto secundario
+          dark: '#333333',     // Gris oscuro
+        },
+        // Mantener algunos colores originales para compatibilidad
         gradient: {
-          from: '#3B82F6',
-          via: '#8B5CF6',
-          to: '#EF4444',
+          from: '#B40000',     // Rojo institucional
+          via: '#003366',      // Azul institucional
+          to: '#B40000',       // Rojo institucional
         }
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EF4444 100%)',
-        'gradient-soft': 'linear-gradient(135deg, #EBF8FF 0%, #F3E8FF 50%, #FEF2F2 100%)',
-        'gradient-dark': 'linear-gradient(135deg, #1E3A8A 0%, #581C87 50%, #991B1B 100%)',
+        // Gradientes institucionales con los colores de la universidad
+        'gradient-primary': 'linear-gradient(135deg, #B40000 0%, #003366 50%, #B40000 100%)',
+        'gradient-soft': 'linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 50%, #F5F5F5 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #000000 0%, #003366 50%, #B40000 100%)',
+        'gradient-institutional': 'linear-gradient(90deg, #B40000 0%, #003366 100%)',
+        'gradient-light': 'linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%)',
       },
       animation: {
         'bounce-slow': 'bounce 3s infinite',

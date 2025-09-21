@@ -237,8 +237,8 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-heading font-bold mb-6">Nuestro Camino</h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-heading font-bold mb-6 text-institutional-white">Nuestro Camino</h2>
+            <p className="text-xl opacity-90 max-w-2xl mx-auto text-institutional-white">
               Un viaje de aprendizaje, crecimiento y construcción de conocimiento
             </p>
           </motion.div>
@@ -258,18 +258,18 @@ const About = () => {
                 }`}
               >
                 {/* Punto en la línea */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full border-4 border-primary-600"></div>
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full border-4 border-institutional-red"></div>
 
                 {/* Contenido */}
                 <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}>
                   <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                    <div className="text-2xl font-bold font-tech text-primary-300 mb-2">
+                    <div className="text-2xl font-bold font-institutional text-institutional-red mb-2">
                       {item.year}
                     </div>
-                    <h3 className="text-xl font-heading font-semibold mb-3">
+                    <h3 className="text-xl font-heading font-semibold mb-3 text-institutional-white">
                       {item.title}
                     </h3>
-                    <p className="opacity-90">
+                    <p className="opacity-90 text-institutional-white">
                       {item.description}
                     </p>
                   </div>

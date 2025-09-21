@@ -3,16 +3,47 @@
 @tailwind utilities;
 
 @layer base {
-  /* * {
-    @apply border-border;
-  } */
-  
-  body {
-    @apply bg-gradient-soft font-body text-gray-900 leading-relaxed;
+  /* Reset base según estándares institucionales */
+  * {
+    @apply border-gray-200;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-semibold;
+  body {
+    @apply bg-institutional-lightGray font-institutional text-institutional-black leading-relaxed;
+    font-size: 16px; /* Tamaño base según especificaciones */
+  }
+  
+  /* Tipografía escalada según especificaciones universitarias */
+  h1 {
+    @apply font-heading font-bold text-institutional-black;
+    font-size: 32px; /* H1: 32px */
+    line-height: 1.2;
+  }
+  
+  h2 {
+    @apply font-heading font-bold text-institutional-black;
+    font-size: 24px; /* H2: 24px */
+    line-height: 1.3;
+  }
+  
+  h3 {
+    @apply font-heading font-bold text-institutional-black;
+    font-size: 18px; /* H3: 18px */
+    line-height: 1.4;
+  }
+  
+  h4, h5, h6 {
+    @apply font-heading font-semibold text-institutional-black;
+  }
+  
+  p {
+    @apply text-accent-medium;
+    font-size: 16px; /* P: 16px */
+    line-height: 1.6;
+  }
+  
+  a {
+    @apply text-secondary-500 hover:text-secondary-600 transition-colors duration-200;
   }
   
   html {
@@ -21,53 +52,143 @@
 }
 
 @layer components {
+  /* Botones con identidad institucional */
   .btn-primary {
-    @apply bg-gradient-primary text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95;
+    @apply bg-institutional-red text-institutional-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary-700 hover:scale-105 hover:shadow-lg active:scale-95;
   }
   
   .btn-secondary {
-    @apply bg-white text-primary-600 border-2 border-primary-600 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-primary-600 hover:text-white hover:scale-105 active:scale-95;
+    @apply bg-institutional-white text-institutional-red border-2 border-institutional-red px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-institutional-red hover:text-institutional-white hover:scale-105 active:scale-95;
   }
   
+  .btn-outline {
+    @apply bg-transparent text-secondary-500 border-2 border-secondary-500 px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-secondary-500 hover:text-institutional-white hover:scale-105 active:scale-95;
+  }
+  
+  /* Cards con estilo académico */
   .card {
-    @apply bg-white rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    @apply bg-institutional-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-gray-100;
+  }
+  
+  .card-institutional {
+    @apply bg-institutional-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg border-l-4 border-l-institutional-red;
   }
   
   .card-gradient {
-    @apply bg-gradient-primary text-white rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    @apply bg-gradient-institutional text-institutional-white rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
   }
   
+  /* Tipografía para hero sections */
   .hero-text {
-    @apply text-5xl md:text-6xl lg:text-7xl font-heading font-bold bg-gradient-primary bg-clip-text text-transparent leading-tight;
+    @apply text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-institutional-black leading-tight;
   }
   
+  .hero-text-gradient {
+    @apply text-5xl md:text-6xl lg:text-7xl font-heading font-bold bg-gradient-institutional bg-clip-text text-transparent leading-tight;
+  }
+  
+  /* Títulos de sección con estilo universitario */
   .section-title {
-    @apply text-3xl md:text-4xl font-heading font-bold text-gray-800 mb-6;
+    @apply text-3xl md:text-4xl font-heading font-bold text-institutional-black mb-6;
+  }
+  
+  .section-title-red {
+    @apply text-3xl md:text-4xl font-heading font-bold text-institutional-red mb-6;
   }
   
   .section-subtitle {
-    @apply text-lg md:text-xl text-gray-600 mb-8 max-w-2xl;
+    @apply text-lg md:text-xl text-accent-medium mb-8 max-w-2xl leading-relaxed;
   }
   
+  /* Navegación con estilo institucional */
   .navbar-item {
-    @apply text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium relative;
+    @apply text-institutional-black hover:text-institutional-red transition-colors duration-200 font-medium relative;
   }
   
   .navbar-item::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600 transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-institutional-red transition-all duration-300;
   }
   
   .navbar-item:hover::after {
     @apply w-full;
   }
+  
+  .navbar-item-active {
+    @apply text-institutional-red;
+  }
+  
+  .navbar-item-active::after {
+    @apply w-full;
+  }
 }
 
 @layer utilities {
+  /* Gradientes de texto institucionales */
   .text-gradient {
+    @apply bg-gradient-institutional bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-primary {
     @apply bg-gradient-primary bg-clip-text text-transparent;
   }
   
+  /* Colores de texto institucionales */
+  .text-institutional-red {
+    color: #B40000;
+  }
+  
+  .text-institutional-blue {
+    color: #003366;
+  }
+  
+  .text-institutional-gray {
+    color: #666666;
+  }
+  
+  .text-institutional-white {
+    color: #FFFFFF;
+  }
+  
+  .text-institutional-black {
+    color: #000000;
+  }
+  
+  /* Backgrounds institucionales */
+  .bg-institutional-red {
+    background-color: #B40000;
+  }
+  
+  .bg-institutional-blue {
+    background-color: #003366;
+  }
+  
+  .bg-institutional-light {
+    background-color: #F5F5F5;
+  }
+  
+  .bg-institutional-white {
+    background-color: #FFFFFF;
+  }
+  
+  /* Clases especiales para contraste en fondos oscuros */
+  .text-on-dark {
+    color: #FFFFFF;
+  }
+  
+  .text-on-light {
+    color: #000000;
+  }
+  
+  .text-secondary-on-dark {
+    color: #F5F5F5;
+  }
+  
+  .text-accent-on-dark {
+    color: #B40000;
+  }
+  
+  /* Animaciones mejoradas */
   .animate-fade-in-up {
     animation: fadeInUp 0.6s ease-out forwards;
   }
@@ -129,20 +250,20 @@
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with institutional colors */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #F5F5F5; /* Gris claro institucional */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EF4444 100%);
+  background: linear-gradient(135deg, #B40000 0%, #003366 100%); /* Gradiente institucional */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563EB 0%, #7C3AED 50%, #DC2626 100%);
+  background: linear-gradient(135deg, #A30000 0%, #002A55 100%); /* Versión más oscura */
 }
